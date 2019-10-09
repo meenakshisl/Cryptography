@@ -1,4 +1,4 @@
-]#for python3
+#for python3
 
 from Crypto.Util.number import *
 
@@ -16,7 +16,7 @@ def chinese_remainder(r,n) :
                 return
     
     N = eval('*'.join(str(i) for i in n))
-    y=[int(N/n[i]) for i in range(len(n))]
+    y=[(N//n[i]) for i in range(len(n))]
     z=[inverse(y[i],n[i]) for i in range(len(y))]
     x=0
     for i in range(len(r)) :
