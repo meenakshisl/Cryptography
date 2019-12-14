@@ -78,8 +78,13 @@ if __name__ == "__main__" :
     #----loop to decrypt each character---------------------
             for j in range(256) :
                 mc='\x00'*(16-i-1) + chr(j) + xor(D,chr(i+1))  #---------mc is the crafter cipher text---------------
-                C=c[:k]+mc+c[k+16:k+32]                        #---------mc is being passed as the second last block-
-                if Decrypt(C) != -1 :                          #---------enters the if condition only if padding is correct
+                print("xor.. : " ,xor(D,chr(i+1))
+                #assert len(mc) == 16
+
+                C=c[:k]+mc+c[k+16:k+32]   
+#---------mc is being passed as the second last block-
+                if Decrypt(C) != -1 :                      
+#---------enters the if condition only if padding is correct
                     
                     D=xor(chr(j),chr(i+1)) + D
                     break
