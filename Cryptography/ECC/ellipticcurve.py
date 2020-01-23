@@ -1,4 +1,4 @@
-
+from Crypto.Util.number import inverse
 
 class Curve :
 
@@ -34,5 +34,44 @@ class Point :
 
         assert other._curve == other._self
 
-        if other
+        if other._x == self._x :
+            if (other._y + self._y) % self._curve.get_p() == 0 :
+                return INFINITY
+            else
+                return self.double()
+        p = self._curve.get_p()
+        m = ((other._y - self._y)*inverse(other._x - self._x , p )) % p
+        xR = (m*m - other._x - self._x) % p
+        yR = (self._y - m*(other._x - self._x)) % p
+        return Point(self,xR,yR)
+
+    #def mult(self,curve,n) :
+        
+    def double(self) :
+        if self == INFINITY :
+            return INFINITY
+
+        p = self._curve.get_p()
+        a = self._curve.get_a()
+        m = ((3*(self._x**2) + a)*inverse(self._y,p)) % p
+
+        xR = (m**2 - 2*self_x)%p
+        yR = (m*(self_x - xR) - self._y) % p
+        return Point(self._curve,x3,y3)
+    
+    def x(self) :
+        return self._x
+
+    def y(self) :
+        return self._y
+
+    def curve(self) :
+        return self._curve
+
+    def order(self) :
+        return self._order
+
+INFINITY = Point(None,None,None)
+
+
 
